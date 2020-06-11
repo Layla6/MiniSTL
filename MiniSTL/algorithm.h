@@ -146,9 +146,21 @@ namespace MiniSTL {
 	}
 
 
+	//********** for_each ******************************
+	template<class InputIterator,class Function>
+	Function for_each(InputIterator first, InputIterator last, Function f) {
+		for (;first != last;++first)
+			f(*first);
+		return f;
+	}
 
-
-
+	//********** find ******************************
+	template<class InputIterator,class T>
+	InputIterator find(InputIterator first,InputIterator last,const T& x) {
+		for (;first != last;++first)
+			if (*first == x)break;
+		return first;
+	}
 
 
 }

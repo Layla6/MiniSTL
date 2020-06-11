@@ -27,6 +27,7 @@ namespace MiniSTL {
 		if (bytes > alloc::EMaxBytes::_MAXBYTES) //大于128调用一级配置器
 			allocator::deallocate(ptr,bytes);   //注意这里不能return，因为free返回指针
 		else {
+			std::cout<< std::endl;
 			std::cout << "**********调用二级配置器：deallocate***********" << std::endl;
 			size_t index = FREE_LIST_INDEX(bytes);  //回收小区块到链表
 			obj* node= static_cast<obj*>(ptr);

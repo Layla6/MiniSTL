@@ -116,11 +116,75 @@ void test_copy() {
 	MiniSTL::copy_backward(ia + 2, ia + 7, ia + 5);
 	for (auto i = 0;i < 10;++i)
 		std::cout << ia[i] << "  ";
+}
+
+struct Compare_N
+{
+	const int n;
+	Compare_N(const int x) :n(x) {}
+	void operator () (int& i)
+	{
+		if (i < n)
+			i = -1;
+		else
+			i = 1;
+	}
+};
+
+void test_vector() {
+	//²âÊÔ¹¹Ôìº¯Êý
+	vector<int> vec(6,1);
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
+
+	//²âÊÔinsert_aux
+	vec.insert_aux(vec.begin()+2,7);
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
+
+	//²âÊÔinsert, ÒÔ¼°capacity ÈÝÁ¿±ä»¯
+	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
+	vec.insert(vec.begin() + 1, 6, 6);
+	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
+	
+	//²âÊÔresize
+	//new_size < size()
+	vec.resize(5,0);
+	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
+	//new_size > size()
+	vec.resize(15, 4);
+	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
 
 
+	//²âÊÔpush_back pop_back,back front
+	vec.push_back(3);vec.push_back(1);vec.pop_back();
+	std::cout << " back: " << vec.back() << "   front: " << vec.front() << std::endl;
+	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
 
+	//²âÊÔfind,sort    ×¢ÒâÐÍ±ðÉùÃ÷vector<int>::pointer
+	vector<int>::pointer ind=find(vec.begin(), vec.end(), 4);
+	std::cout << " index: " << ind - vec.begin() << std::endl;
+
+	for_each(vec.begin(), vec.end(), Compare_N(5));
+	for (auto it = vec.begin();it != vec.end();++it)
+		std::cout << *it << "  ";
 }
 int main() {
+
 	/*
 	//²âÊÔÒ»¼¶¶þ¼¶¿Õ¼äÅäÖÃÆ÷
 	std::cout << "test_allocator£º²âÊÔÒ»¼¶ÅäÖÃÆ÷allocator " << std::endl;
@@ -139,5 +203,10 @@ int main() {
 	test_copy();
 	*/
 	
+	/*
+	//²âÊÔvector
+	*/
+	test_vector();
+
 	return 0;
 }
