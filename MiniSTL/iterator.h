@@ -78,6 +78,7 @@ namespace MiniSTL {
 		}
 		return dist;
 	}
+
 	template<class RandomIterator>
 	typename iterator_traits<RandomIterator>::difference_type
 		_distance(RandomIterator first, RandomIterator last, random_access_iterator_tag) {

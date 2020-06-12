@@ -4,8 +4,18 @@
 #include <iostream>
 #include <vector>
 #include "vector.h"
+#include "list.h"
 #include "algorithm.h"
 using namespace MiniSTL;
+// ^b*[^:b#/]+.*$
+
+//打印容器的元素          *****注意参数必须是引用类型，因为有些容器没有定义复制构造函数，因此使用默认 可能会造成内存泄漏（eg list容器）
+template<class cont>
+void print_container(cont& a) {
+	for (auto it = a.begin();it != a.end();++it)
+		std::cout << *it << "  ";
+	std::cout << std::endl;
+}
 void test_allocator(){
 	//size_t sz = 1000000000000000;  //test out_of_memory
 	size_t sz = 10;  //test successful example
@@ -130,61 +140,60 @@ struct Compare_N
 			i = 1;
 	}
 };
-
 void test_vector() {
 	//测试构造函数
 	vector<int> vec(6,1);
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
+	print_container<vector<int>>(vec);
 
 	//测试insert_aux
 	vec.insert_aux(vec.begin()+2,7);
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
+	print_container<vector<int>>(vec);
 
 	//测试insert, 以及capacity 容量变化
 	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
 	vec.insert(vec.begin() + 1, 6, 6);
 	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
+	print_container<vector<int>>(vec);
 	
 	//测试resize
 	//new_size < size()
 	vec.resize(5,0);
 	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
+	print_container<vector<int>>(vec);
 	//new_size > size()
 	vec.resize(15, 4);
 	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
-
+	print_container<vector<int>>(vec);
 
 	//测试push_back pop_back,back front
 	vec.push_back(3);vec.push_back(1);vec.pop_back();
 	std::cout << " back: " << vec.back() << "   front: " << vec.front() << std::endl;
 	std::cout << "capacity:  " << vec.capacity() << "  size: " << vec.size() << " " << std::endl;
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
-	std::cout << std::endl;
+	print_container<vector<int>>(vec);
 
 	//测试find,sort    注意型别声明vector<int>::pointer
 	vector<int>::pointer ind=find(vec.begin(), vec.end(), 4);
 	std::cout << " index: " << ind - vec.begin() << std::endl;
 
-	for_each(vec.begin(), vec.end(), Compare_N(5));
-	for (auto it = vec.begin();it != vec.end();++it)
-		std::cout << *it << "  ";
+	for_each(vec.begin(), vec.end(), Compare_N(4)); //大于4 则vec[i]=-1,否则vec[i]=1;
+	print_container<vector<int>>(vec);
 }
-int main() {
+void test_list() {
+	//测试构造函数
+	list<int> li;
+	li.push_back(1);
+	li.push_back(2);
+	li.push_back(3);
+	//li.pop_back();
+	print_container<list<int>>(li);
+	std::cout << "test front() " <<li.front() << "test back() " << li.back() << " test size() "<<li.size()<< std::endl;
+	li.front() = 9;
+	li.back() = 4;
+	li.insert(li.begin() + 1, 66);
+	print_container<list<int>>(li);
+}
 
+int main() {
 	/*
 	//测试一级二级空间配置器
 	std::cout << "test_allocator：测试一级配置器allocator " << std::endl;
@@ -205,8 +214,13 @@ int main() {
 	
 	/*
 	//测试vector
-	*/
 	test_vector();
-
+	*/
+	/*
+	//测试list
+	test_list();
+	*/
+	
+	test_list();
 	return 0;
 }

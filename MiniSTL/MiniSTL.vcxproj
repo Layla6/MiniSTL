@@ -150,6 +150,7 @@
     <ClInclude Include="allocator.h" />
     <ClInclude Include="construct.h" />
     <ClInclude Include="iterator.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="simple_alloc.h" />
     <ClInclude Include="type_traits.h" />
     <ClInclude Include="uninitialized_imp.h" />
