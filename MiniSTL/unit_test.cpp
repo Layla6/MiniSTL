@@ -189,8 +189,16 @@ void test_list() {
 	std::cout << "test front() " <<li.front() << "test back() " << li.back() << " test size() "<<li.size()<< std::endl;
 	li.front() = 9;
 	li.back() = 4;
-	li.insert(li.begin() + 1, 66);
+	li.insert((li.begin().node->next->next), 66);
 	print_container<list<int>>(li);
+	li.erase(li.begin());
+	print_container<list<int>>(li);
+	li.clear();
+	print_container<list<int>>(li);
+	if (li.empty())
+		std::cout << " list is empty." << std::endl;
+	else
+		std::cout << " list is not empty." << std::endl;
 }
 
 int main() {
@@ -220,7 +228,5 @@ int main() {
 	//²âÊÔlist
 	test_list();
 	*/
-	
-	test_list();
 	return 0;
 }

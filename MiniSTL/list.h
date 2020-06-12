@@ -65,7 +65,6 @@ namespace MiniSTL {
         }
         bool operator==(const self& i) const {return node==i.node;}
         bool operator!=(const self& i) const {return node != i.node;}
-        bool operator+(const self& i) const { return node != i.node; }
     };
 
 
