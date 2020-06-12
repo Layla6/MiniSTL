@@ -1,6 +1,6 @@
 # MiniSTL
 &nbsp;&nbsp;根据《STL源码剖析》实现简易的STL标准库的一个子集   
-&nbsp;&nbsp;将书中代码整理扩充，增加单元测试。   
+&nbsp;&nbsp;实现基本功能   
 &nbsp;&nbsp;学习模板编程
 &emsp;
 ## 文件描述
