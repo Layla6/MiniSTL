@@ -6,6 +6,7 @@
 #include "vector.h"
 #include "list.h"
 #include "algorithm.h"
+#include "deque.h"
 using namespace MiniSTL;
 // ^b*[^:b#/]+.*$
 
@@ -178,6 +179,7 @@ void test_vector() {
 	for_each(vec.begin(), vec.end(), Compare_N(4)); //大于4 则vec[i]=-1,否则vec[i]=1;
 	print_container<vector<int>>(vec);
 }
+
 void test_list() {
 	//测试构造函数
 	list<int> li;
@@ -201,6 +203,44 @@ void test_list() {
 		std::cout << " list is not empty." << std::endl;
 }
 
+void test_deque() {
+	deque<int> dq(126,6);//552
+	std::cout << " =======test construct:   =======" << std::endl;
+	dq.print_info();
+
+	//test front back; push and pop
+	std::cout << " =======test front back; push and pop   =======" << std::endl;
+	dq.push_front(1);
+	dq.print_info();
+	dq.push_back(2);
+	dq.print_info();
+	dq.pop_back();
+	dq.pop_front();
+	dq.print_info();
+
+	//erase
+	std::cout << " =======test erase   =======" << std::endl;
+	dq.push_front(1);
+	dq[1] = 2;dq[2] = 3;dq[3] = 4;
+	dq.erase(dq.begin() + 1);
+	dq.print_info();
+	dq.erase(dq.begin(),dq.begin()+3);
+	dq.print_info();
+
+	//test insert
+	std::cout << " =======test insert   =======" << std::endl;
+	dq.insert(dq.begin() + 2, 5);  //判断分支 前面元素少
+	dq.insert(dq.begin() + 120, 2);  //判断分支 后面元素少
+	dq.print_info();
+
+	//test sort  find
+	std::cout << " =======test find and for_each   =======" << std::endl;
+	deque<int>::iterator ind = find(dq.begin(), dq.end(), 2);
+	std::cout << " index: " << ind - dq.begin() << std::endl;
+
+	for_each(dq.begin(), dq.end(), Compare_N(5)); //大于4 则vec[i]=-1,否则vec[i]=1;
+	dq.print_info();
+}
 int main() {
 	/*
 	//测试一级二级空间配置器
@@ -228,5 +268,6 @@ int main() {
 	//测试list
 	test_list();
 	*/
+	test_deque();
 	return 0;
 }

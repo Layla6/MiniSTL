@@ -19,7 +19,7 @@ namespace MiniSTL {
     };
    
     template <class T,class Ref,class Ptr>
-    struct _list_iterator {
+    struct _list_iterator :public iterator<bidirectional_iterator_tag, T> {
         typedef _list_iterator<T, T&, T*> iterator;
         typedef _list_iterator<T, Ref, Ptr> self;
 
@@ -27,9 +27,10 @@ namespace MiniSTL {
         typedef T value_type;
         typedef Ptr pointer;
         typedef Ref reference;
+        typedef ptrdiff_t difference_type;
         typedef _list_node<T>* link_type;
         typedef size_t size_type;
-        typedef ptrdiff_t difference_type;
+
 
         link_type node;//当前迭代器 指向的list的节点
 
