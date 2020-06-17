@@ -7,6 +7,8 @@
 #include "list.h"
 #include "algorithm.h"
 #include "deque.h"
+#include "stack.h"
+#include "queue.h"
 using namespace MiniSTL;
 // ^b*[^:b#/]+.*$
 
@@ -204,7 +206,8 @@ void test_list() {
 }
 
 void test_deque() {
-	deque<int> dq(126,6);//552
+	//deque<int> dq(126,6);//552
+	deque<int> dq;//552
 	std::cout << " =======test construct:   =======" << std::endl;
 	dq.print_info();
 
@@ -241,6 +244,43 @@ void test_deque() {
 	for_each(dq.begin(), dq.end(), Compare_N(5)); //大于4 则vec[i]=-1,否则vec[i]=1;
 	dq.print_info();
 }
+
+void test_stack() {	
+	stack<int> st;
+	std::cout << " size: " << st.size() <<" is empty: "<<st.empty()<< std::endl;
+	st.push(1);
+	st.push(2);
+	st.push(5);
+	st.push(7);
+	std::cout <<" size: "<< st.size() <<" top: "<<st.top()<< std::endl;
+	st.top() = -1;
+	std::cout << " size: " << st.size() << " top: " << st.top() << std::endl;
+	st.pop();std::cout << " size: " << st.size() << " top: " << st.top() << std::endl;
+	st.pop();std::cout << " size: " << st.size() << " top: " << st.top() << std::endl;
+	st.pop();std::cout << " size: " << st.size() << " top: " << st.top() << " is empty: " << st.empty() << std::endl;
+	st.pop();std::cout << " size: " << st.size() << " is empty: " << st.empty() << std::endl;
+	//stack<int> st1;
+	//bool res1 = st == st1;
+	//bool res2 = st < st1;
+	//std::cout << res1 << "   <: " << res2 << std::endl;
+}
+void test_queue() {
+	queue<int> que;
+	std::cout << " size: " << que.size() << " is empty: " << que.empty() << std::endl;
+	que.push(1);
+	que.push(2);
+	que.push(5);
+	que.push(7);
+	std::cout << " size: " << que.size() << " front: " << que.front() << " back: " << que.back()<<" is empty: " << que.empty() << std::endl;
+	que.front() = -1;
+	que.back() = 99;
+	std::cout << " size: " << que.size() << " front: " << que.front() <<" back: "<<que.back()<< std::endl;
+	que.pop();std::cout << " size: " << que.size() << " front: " << que.front() << " back: " << que.back() << std::endl;
+	que.pop();std::cout << " size: " << que.size() << " front: " << que.front() << " back: " << que.back() << std::endl;
+	que.pop();std::cout << " size: " << que.size() << " front: " << que.front() << " back: " << que.back() << std::endl;
+	que.pop();std::cout << " size: " << que.size() << " is empty: " << que.empty() << std::endl;
+}
+
 int main() {
 	/*
 	//测试一级二级空间配置器
@@ -250,24 +290,16 @@ int main() {
 	test_alloc();  
 	*/
 
-	/*
 	//测试构造和析构工具
-	test_construct();
-	*/
+	//test_construct();
 
-	/*
-	//测试算法copy
-	test_copy();
-	*/
-	
-	/*
-	//测试vector
-	test_vector();
-	*/
-	/*
-	//测试list
-	test_list();
-	*/
-	test_deque();
+	//test_copy();
+
+	//test_vector();
+
+	//test_list();
+	//test_deque();
+	//test_stack();
+	test_queue();
 	return 0;
 }

@@ -157,6 +157,7 @@ namespace MiniSTL {
 		void print_info() {
 			std::cout << std::endl;
 			std::cout << std::endl;
+			std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << finish.node << "  " << start.node << std::endl;
 			std::cout << "map size:  " << map_size <<" cur_map_size:  "<<size_t(finish.node-start.node+1)<< std::endl;
 			std::cout << "buffer size:  " << buffer_size() << " cur_buffer_size:  "<<size()<< std::endl;
 			for (auto it = begin();it != end();++it)
@@ -170,6 +171,10 @@ namespace MiniSTL {
 		}
 		deque(int n) :start(), finish(), map(0), map_size(0) {
 			fill_initialize(n, value_type());
+		}
+		deque() :start(), finish(), map(0), map_size(0) {
+			//注意默认构造函数必须声明，且必须调用fill_initialize初始化
+			fill_initialize(0, value_type());
 		}
 		~deque() {
 			if (map != nullptr) {
