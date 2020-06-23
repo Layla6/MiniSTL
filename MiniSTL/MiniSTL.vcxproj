@@ -151,13 +151,17 @@
     <ClInclude Include="construct.h" />
     <ClInclude Include="deque.h" />
     <ClInclude Include="deque_bufsize.h" />
+    <ClInclude Include="funtion.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="queue.h" />
+    <ClInclude Include="rb_tree.h" />
+    <ClInclude Include="set.h" />
     <ClInclude Include="simple_alloc.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="type_traits.h" />
     <ClInclude Include="uninitialized_imp.h" />
+    <ClInclude Include="util.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

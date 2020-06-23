@@ -9,6 +9,7 @@
 #include "deque.h"
 #include "stack.h"
 #include "queue.h"
+#include "set.h"
 using namespace MiniSTL;
 // ^b*[^:b#/]+.*$
 
@@ -281,6 +282,51 @@ void test_queue() {
 	que.pop();std::cout << " size: " << que.size() << " is empty: " << que.empty() << std::endl;
 }
 
+void test_set() {
+	int ia[5] = { 0,1,2,3,4 };
+	set<int> iset(ia, ia + 5);
+	std::cout << "  size:  "<<iset.size() << std::endl;
+	std::cout << "3 count =" << iset.count(3) << std::endl;
+	
+	iset.insert(3);
+	std::cout << "size=" << iset.size() << std::endl;
+	std::cout << "3 count =" << iset.count(3) << std::endl;
+	
+	iset.insert(5);
+	std::cout << "size=" << iset.size() << std::endl;
+	std::cout << "3 count =" << iset.count(3) << std::endl;
+	
+	//iset.erase(1);
+	std::cout << "size=" << iset.size() << std::endl;
+	std::cout << "3 count =" << iset.count(3) << std::endl;
+	std::cout << "1 count =" << iset.count(1) << std::endl;
+
+	set<int>::iterator ite1 = iset.begin();
+	set<int>::iterator ite2 = iset.end();
+	for (; ite1 != ite2; ++ite1) {
+		std::cout << *ite1;
+	}
+	std::cout << std::endl;
+
+	// find可以搜索元素，但不推荐
+	ite1 = find(iset.begin(), iset.end(), 3);
+	if (ite1 != iset.end())
+		std::cout << "3 found" << std::endl;
+
+	ite1 = find(iset.begin(), iset.end(), -1);
+	if (ite1 == iset.end())
+		std::cout << "-1 not found" << std::endl;
+
+	// 关联式容器应使用专用的find函数搜索更有效率
+	ite1 = iset.find(3);
+	if (ite1 != iset.end())
+		std::cout << "3 found" << std::endl;
+
+	ite1 = iset.find(-1);
+	if (ite1 == iset.end())
+		std::cout << "-1 not found" << std::endl;
+
+}
 int main() {
 	/*
 	//测试一级二级空间配置器
@@ -300,6 +346,7 @@ int main() {
 	//test_list();
 	//test_deque();
 	//test_stack();
-	test_queue();
+	//test_queue();
+	test_set();
 	return 0;
 }
