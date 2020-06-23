@@ -11,7 +11,7 @@
 &nbsp;&nbsp;迭代器和迭代器萃取：iterator  
 &nbsp;&nbsp;容器元素和特性的萃取：type_traits  
 &nbsp;&nbsp;基本算法：algorithm  
-&nbsp;&nbsp;序列容器：vector，list，deque
+&nbsp;&nbsp;序列容器：vector，list，deque，stack,queue
 &nbsp;&nbsp;各个模块的单元测试：unit_test  
 &emsp;
 ### 未完成  
